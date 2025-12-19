@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah Leventhal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="embed.js"></script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <canvas id="canvas1"></canvas>
+
+    <!-- Home Link -->
+
+    <div class="container">
+        <h1>Noah Leventhal</h1>
+
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="radiusRange">Push Radius <span id="radiusValue">100px</span></label>
+            <input type="range" id="radiusRange" min="50" max="300" value="100">
+        </div>
+        <div class="control-group">
+            <label for="strengthRange">Push Force <span id="strengthValue">0.15</span></label>
+            <input type="range" id="strengthRange" min="0.01" max="0.5" step="0.01" value="0.15">
+        </div>
+
+        <div class="control-group">
+            <label for="densityRange">Density <span id="densityValue">3.5</span></label>
+            <input type="range" id="densityRange" min="1" max="5" step="0.1" value="3.5">
+        </div>
+
+        <div class="control-group">
+            <label for="speedRange">Base Speed <span id="speedValue">1.0x</span></label>
+            <input type="range" id="speedRange" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+
+        <div class="control-group">
+            <label for="linkRange">Link Range <span id="linkValue">125px</span></label>
+            <input type="range" id="linkRange" min="20" max="250" value="125">
+        </div>
+
+        <div class="control-group">
+            <label for="depthRange">3D Strength <span id="depthValue">1.0</span></label>
+            <input type="range" id="depthRange" min="0" max="2" step="0.1" value="1.0">
+        </div>
+
+        <div class="control-group">
+            <label for="lightRadiusRange">Light Radius <span id="lightRadiusValue">500px</span></label>
+            <input type="range" id="lightRadiusRange" min="0" max="800" value="500">
+        </div>
+
+        <div class="control-group">
+            <label for="lightBoostRange">Light Boost <span id="lightBoostValue">0.05</span></label>
+            <input type="range" id="lightBoostRange" min="0" max="1.0" step="0.05" value="0.05">
+        </div>
+
+        <div class="control-group">
+            <label for="frictionRange">Friction <span id="frictionValue">0.94</span></label>
+            <input type="range" id="frictionRange" min="0.900" max="0.999" step="0.001" value="0.940">
+        </div>
+
+        <button id="resetBtn">Reset Defaults</button>
+    </div>
+
+    <!-- Toggle Settings Button -->
+    <button id="toggleControls">Hide Settings</button>
+    <script src="./script.js"></script>
+<script src="favicon.js"></script></body>
+
+</html>

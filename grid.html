@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah Leventhal - Ripple Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="embed.js"></script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <canvas id="canvas1"></canvas>
+
+    <!-- Home Link -->
+
+    <div class="container">
+        <h1>Noah Leventhal</h1>
+
+        <div class="links">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="spacingRange">Grid Size <span id="spacingValue">25px</span></label>
+            <input type="range" id="spacingRange" min="20" max="100" value="25">
+        </div>
+
+        <div class="control-group">
+            <label for="tensionRange">Bounce (Stiffness) <span id="tensionValue">0.15</span></label>
+            <input type="range" id="tensionRange" min="0.01" max="0.3" step="0.01" value="0.15">
+        </div>
+
+        <div class="control-group">
+            <label for="frictionRange">Flow (Friction) <span id="frictionValue">0.80</span></label>
+            <input type="range" id="frictionRange" min="0.80" max="0.99" step="0.01" value="0.80">
+        </div>
+
+        <div class="control-group">
+            <label for="forceRange">Push Strength <span id="forceValue">10</span></label>
+            <input type="range" id="forceRange" min="5" max="50" value="10">
+        </div>
+
+        <div class="control-group">
+            <label for="lightRadiusRange">Light Radius <span id="lightRadiusValue">388px</span></label>
+            <input type="range" id="lightRadiusRange" min="100" max="800" value="388">
+        </div>
+
+        <div class="control-group">
+            <label for="lightBoostRange">Light Boost <span id="lightBoostValue">0.24</span></label>
+            <input type="range" id="lightBoostRange" min="0.0" max="1.0" step="0.01" value="0.24">
+        </div>
+
+        <div class="control-group">
+            <label for="layoutRange">Mesh Type</label>
+            <div style="display: flex; gap: 10px; color: #94a3b8; font-size: 0.8rem; margin-top: 5px;">
+                <span>Square</span>
+                <input type="range" id="layoutRange" min="0" max="2" step="1" value="0" style="flex:1">
+                <span>Tri</span>
+                <span>Hex</span>
+            </div>
+        </div>
+
+        <button id="resetBtn">Reset Defaults</button>
+    </div>
+
+    <button id="toggleControls">Hide Settings</button>
+
+    <script src="./grid.js"></script>
+<script src="favicon.js"></script></body>
+
+</html>

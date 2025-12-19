@@ -1,6 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  font-family: system-ui;
-  background: #b1b2f5;
-  color: white;
-  text-align: center;
+    overflow: hidden;
+    background: #0f172a;
+    /* Deep Navy/Slate 900 - sleek and uniform */
+    font-family: 'Inter', sans-serif;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+    pointer-events: none;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.container h1,
+.container p,
+.container .links {
+    pointer-events: auto;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    /* Extra bold */
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    /* Tight tracking for modern feel */
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    /* Gradient text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    /* Removed glow */
+}
+
+p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    color: #cbd5e1;
+    /* Slate 300 */
+    letter-spacing: normal;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 9999px;
+    /* Pill shape */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    text-transform: none;
+    /* No more uppercase */
+    letter-spacing: normal;
+}
+
+.links a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* Home Link (Top Left) */
+.home-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease;
+}
+
+.home-link:hover {
+    background: white;
+    color: #0f172a;
+}
+
+/* Controls Styling */
+.controls {
+    position: absolute;
+    bottom: 70px;
+    /* Lifted up for toggle button */
+    right: 20px;
+    z-index: 10;
+    background: rgba(15, 23, 42, 0.6);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 250px;
+    max-height: 70vh;
+    /* Prevent going off screen */
+    overflow-y: auto;
+    /* Scroll if needed */
+    scrollbar-width: thin;
+    /* Firefox */
+
+    /* Toggle Transition */
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+}
+
+.controls.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+/* Custom Scrollbar for webkit */
+.controls::-webkit-scrollbar {
+    width: 6px;
+}
+
+.controls::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.control-group label {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    /* Push value to the right */
+    align-items: center;
+}
+
+.control-group label span {
+    color: white;
+    font-family: monospace;
+    font-weight: 400;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #94a3b8;
+    /* Matches theme */
+}
+
+/* Reset Button */
+#resetBtn {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#resetBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Toggle Controls Button */
+#toggleControls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    color: #94a3b8;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 99px;
+    backdrop-filter: blur(5px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#toggleControls:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
 }

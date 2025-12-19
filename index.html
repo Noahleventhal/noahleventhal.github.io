@@ -1,17 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="./style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noah Leventhal - Experiments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  </head>
-    
-  <body>
-  <h1>website in progress</h1>
-    <script  src="./script.js"></script>
+    body {
+      background: #0f172a;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-  </body>
-  
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    a:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+  <h1>Noah Leventhal</h1>
+  <div class="links">
+    <a href="particles.html">Particles</a>
+    <a href="grid.html">Grid</a>
+    <a href="flow.html">Flow</a>
+  </div>
+<script src="favicon.js"></script></body>
+
 </html>

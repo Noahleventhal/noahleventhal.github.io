@@ -83,21 +83,21 @@ lightBoostSlider.addEventListener('input', updateLabels);
 saveBtn.addEventListener('click', saveSettings);
 
 resetBtn.addEventListener('click', function () {
-    spacingSlider.value = 25;
-    tensionSlider.value = 0.15;
-    frictionSlider.value = 0.80;
+    spacingSlider.value = 35;
+    tensionSlider.value = 0.25;
+    frictionSlider.value = 0.81;
     forceSlider.value = 10;
-    lightRadiusSlider.value = 388;
-    lightBoostSlider.value = 0.24;
-    layoutSlider.value = 0;
+    lightRadiusSlider.value = 166;
+    lightBoostSlider.value = 0.5;
+    layoutSlider.value = 1; // Tri
     updateLabels();
     init();
 });
 
 toggleBtn.addEventListener('click', function () {
     controlsPanel.classList.toggle('hidden');
-    if (controlsPanel.classList.contains('hidden')) toggleBtn.innerText = 'Show Settings';
-    else toggleBtn.innerText = 'Hide Settings';
+    if (controlsPanel.classList.contains('hidden')) toggleBtn.innerText = 'Settings';
+    else toggleBtn.innerText = 'Close';
 });
 
 let mouse = {

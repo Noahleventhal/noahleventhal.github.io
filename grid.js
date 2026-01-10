@@ -197,8 +197,8 @@ function animate() {
                 dist = Math.sqrt((p.x - mouse.x) ** 2 + (p.y - mouse.y) ** 2);
             }
 
-            // Base alpha 0.2
-            let alpha = 0.2;
+            // Base alpha 0.4
+            let alpha = 0.4;
             if (dist < lightRadius) {
                 // Boost alpha based on proximity
                 alpha += (1 - dist / lightRadius) * lightBoost;
@@ -206,7 +206,7 @@ function animate() {
             // Clamp alpha
             if (alpha > 1) alpha = 1;
 
-            ctx.strokeStyle = `rgba(45, 212, 191, ${alpha})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
             if (layout === 2 && dist < 150) ctx.lineWidth = 2;
             else ctx.lineWidth = 1;
 

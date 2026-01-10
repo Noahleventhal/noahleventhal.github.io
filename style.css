@@ -6,8 +6,8 @@
 
 body {
     overflow: hidden;
-    background: #0f172a;
-    /* Deep Navy/Slate 900 - sleek and uniform */
+    background: #000000;
+    /* Pure black background */
     font-family: 'Inter', sans-serif;
     color: white;
     -webkit-font-smoothing: antialiased;

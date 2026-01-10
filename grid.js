@@ -14,6 +14,7 @@ const lightRadiusSlider = document.getElementById('lightRadiusRange');
 const lightBoostSlider = document.getElementById('lightBoostRange');
 const layoutSlider = document.getElementById('layoutRange');
 const resetBtn = document.getElementById('resetBtn');
+const saveBtn = document.getElementById('saveBtn');
 
 // Labels
 const spacingLabel = document.getElementById('spacingValue');
@@ -36,6 +37,41 @@ function updateLabels() {
     lightBoostLabel.innerText = lightBoostSlider.value;
 }
 
+function saveSettings() {
+    const settings = {
+        spacing: spacingSlider.value,
+        tension: tensionSlider.value,
+        friction: frictionSlider.value,
+        force: forceSlider.value,
+        lightRadius: lightRadiusSlider.value,
+        lightBoost: lightBoostSlider.value,
+        layout: layoutSlider.value
+    };
+    localStorage.setItem('gridSettings', JSON.stringify(settings));
+
+    // Visual feedback
+    const originalText = saveBtn.innerText;
+    saveBtn.innerText = 'Saved!';
+    setTimeout(() => {
+        saveBtn.innerText = originalText;
+    }, 1000);
+}
+
+function loadSettings() {
+    const saved = localStorage.getItem('gridSettings');
+    if (saved) {
+        const settings = JSON.parse(saved);
+        spacingSlider.value = settings.spacing;
+        tensionSlider.value = settings.tension;
+        frictionSlider.value = settings.friction;
+        forceSlider.value = settings.force;
+        lightRadiusSlider.value = settings.lightRadius;
+        lightBoostSlider.value = settings.lightBoost;
+        layoutSlider.value = settings.layout !== undefined ? settings.layout : 0;
+        updateLabels();
+    }
+}
+
 spacingSlider.addEventListener('input', function () { updateLabels(); init(); });
 layoutSlider.addEventListener('input', function () { init(); });
 tensionSlider.addEventListener('input', updateLabels);
@@ -43,6 +79,8 @@ frictionSlider.addEventListener('input', updateLabels);
 forceSlider.addEventListener('input', updateLabels);
 lightRadiusSlider.addEventListener('input', updateLabels);
 lightBoostSlider.addEventListener('input', updateLabels);
+
+saveBtn.addEventListener('click', saveSettings);
 
 resetBtn.addEventListener('click', function () {
     spacingSlider.value = 25;
@@ -257,5 +295,6 @@ window.addEventListener('resize', function () {
     init();
 });
 
+loadSettings();
 init();
 animate();

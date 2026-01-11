@@ -7,9 +7,6 @@ faviconLink.type = 'image/x-icon';
 faviconLink.rel = 'shortcut icon';
 document.getElementsByTagName('head')[0].appendChild(faviconLink);
 
-const bgImage = new Image();
-bgImage.src = 'favicon-bg.png';
-
 const fonts = [
     'Inter', 'Times New Roman', 'Courier New', 'Brush Script MT',
     'Copperplate', 'Papyrus', 'Comic Sans MS', 'Impact', 'Georgia',
@@ -20,25 +17,47 @@ const fonts = [
 
 let fontIndex = 0;
 
-bgImage.onload = function () {
-    setInterval(() => {
-        // 1. Draw Background Tile
-        faviconCtx.clearRect(0, 0, 64, 64);
-        faviconCtx.drawImage(bgImage, 0, 0, 64, 64);
+// Helper for rounded rect
+function roundedRect(ctx, x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+}
 
-        // 2. Draw 'N'
-        faviconCtx.fillStyle = 'black';
-        faviconCtx.textAlign = 'center';
-        faviconCtx.textBaseline = 'middle';
+// Start loop immediately (no image load needed)
+setInterval(() => {
+    // 1. Clear
+    faviconCtx.clearRect(0, 0, 64, 64);
 
-        // Pick font
-        let font = fonts[fontIndex];
-        fontIndex = (fontIndex + 1) % fonts.length;
+    // 2. Draw Yellow Rounded Background
+    faviconCtx.fillStyle = '#FFD700'; // "Bit more yellow" (Goldish yellow)
+    // or try #FCD34D (Tailwind yellow-300) for a nice soft yellow
+    // Let's go with a nice bright but standard yellow
+    faviconCtx.fillStyle = '#FACC15';
 
-        faviconCtx.font = `bold 40px "${font}"`;
-        faviconCtx.fillText('N', 32, 34); // Slight vertical offset to center visually
+    roundedRect(faviconCtx, 0, 0, 64, 64, 24); // Heavy rounding (24px radius on 64px box)
+    faviconCtx.fill();
 
-        // 3. Update Favicon
-        faviconLink.href = faviconCanvas.toDataURL('image/png');
-    }, 2500); // Cycle every 2.5 seconds
-};
+    // 3. Draw 'N'
+    faviconCtx.fillStyle = 'black';
+    faviconCtx.textAlign = 'center';
+    faviconCtx.textBaseline = 'middle';
+
+    // Pick font
+    let font = fonts[fontIndex];
+    fontIndex = (fontIndex + 1) % fonts.length;
+
+    faviconCtx.font = `bold 40px "${font}"`;
+    faviconCtx.fillText('N', 32, 34);
+
+    // 4. Update
+    faviconLink.href = faviconCanvas.toDataURL('image/png');
+}, 2500);

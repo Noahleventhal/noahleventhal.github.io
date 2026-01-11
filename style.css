@@ -5,16 +5,20 @@
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
+    /* Allow vertical scroll */
     background: #000000;
     /* Pure black background */
     font-family: 'Inter', sans-serif;
     color: white;
     -webkit-font-smoothing: antialiased;
+    min-height: 200vh;
+    /* Reveal more space */
 }
 
 canvas {
-    position: absolute;
+    position: fixed;
+    /* Stay in place while scrolling */
     top: 0;
     left: 0;
     width: 100%;
@@ -23,16 +27,21 @@ canvas {
 }
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Move contents up */
+    padding-top: 25vh;
+    /* Position slightly above center */
+    align-items: center;
     text-align: center;
     z-index: 1;
+    position: relative;
     pointer-events: none;
-    width: 100%;
-    max-width: 800px;
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .container h1,
@@ -43,19 +52,33 @@ canvas {
 
 h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 800;
-    /* Extra bold */
+    font-size: clamp(3rem, 12vw, 12rem);
+    /* Slightly smaller */
+    font-weight: 700;
+    /* Boldest available for Space Grotesk */
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
     /* Tight tracking for modern feel */
-    background: linear-gradient(to right, #ffffff, #94a3b8);
-    /* Gradient text */
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    /* Stay on one line */
+    color: #ffffff;
+    /* Solid white */
     text-shadow: none;
     /* Removed glow */
+    position: relative;
+    /* For canvas overlay */
+}
+
+.hero-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    /* Thicker */
+    color: rgba(255, 255, 255, 0.9);
+    /* Slightly brighter for thickness perception */
+    margin-top: -0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Readability over lines */
 }
 
 p {
@@ -222,27 +245,220 @@ p {
 }
 
 /* Toggle Controls Button */
+/* Full Width Island */
+.island-container {
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    z-index: 5;
+    pointer-events: none;
+    /* Wrapper shouldn't block */
+    display: flex;
+    justify-content: center;
+}
+
+.island {
+    max-width: 100%;
+    border-radius: 0;
+    /* Full bleed */
+    width: 100%;
+    margin-top: 10vh;
+    padding: 80px 20px;
+    /* More padding inside */
+    background: #ffffff;
+    color: #0f172a;
+    /* Slate 900 text */
+    pointer-events: auto;
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+    /* Shadow pointing up */
+}
+
+/* Gear Button */
 #toggleControls {
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
-    z-index: 10;
+    bottom: auto;
+    /* Clear bottom */
+    z-index: 20;
+    /* Higher than island */
     color: #94a3b8;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    border-radius: 6px;
-    backdrop-filter: blur(5px);
-    font-weight: 500;
+    border: none;
+    padding: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+#toggleControls svg {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.5px;
 }
 
 #toggleControls:hover {
-    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+    /* Spin effect */
+    background: transparent;
+    border: none;
+}
+
+.controls {
+    bottom: auto;
+    top: 70px;
+    right: 20px;
+    max-height: 80vh;
+}
+
+.island h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+}
+
+.island p {
+    color: #475569;
+    /* Slate 600 */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.island img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    display: block;
+    background: #e2e8f0;
+    /* Placeholder grey */
+    min-height: 400px;
+    object-fit: cover;
+}
+
+/* Cycler Styles */
+.cycler-container {
+    margin-top: 3rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: auto;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cycler-word {
+    color: #ffffff;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: inline-block;
+}
+
+.cycler-word.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cycler-static {
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+}
+
+/* Spinner Styles */
+.spinner-container {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    /* Viewport height for approx 3 items */
+    position: relative;
+    font-family: 'Space Grotesk', sans-serif;
+    perspective: 1000px;
+}
+
+.spinner-text-static {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.spinner-column {
+    height: 100%;
+    width: 360px;
+    /* Wider to fit long text */
+    overflow-y: scroll;
+    /* scroll-behavior: smooth; REMOVED to fix auto-scroll conflict */
+    /* For manual interaction */
+    position: relative;
+
+    /* Hide Scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+
+    /* Snap Logic - REMOVED for smooth JS animation */
+    /* scroll-snap-type: y mandatory; */
+
+    /* Visual Trickery */
+    mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            black 20%,
+            black 80%,
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            black 20%,
+            black 80%,
+            transparent 100%);
+}
+
+.spinner-column::-webkit-scrollbar {
+    display: none;
+}
+
+.spinner-item {
+    height: 50px;
+    /* Fixed height for calculations */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    opacity: 0.3;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+    scroll-snap-align: center;
+    white-space: nowrap;
+    cursor: grab;
+}
+
+.spinner-item:active {
+    cursor: grabbing;
+}
+
+.spinner-item.active {
+    opacity: 1 !important;
+    transform: scale(1.15);
+    /* Slightly larger */
+    font-weight: 800;
+    text-shadow: none;
+    /* No glow */
+    color: #ffffff !important;
+    z-index: 10;
 }

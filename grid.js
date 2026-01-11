@@ -96,8 +96,8 @@ resetBtn.addEventListener('click', function () {
 
 toggleBtn.addEventListener('click', function () {
     controlsPanel.classList.toggle('hidden');
-    if (controlsPanel.classList.contains('hidden')) toggleBtn.innerText = 'Settings';
-    else toggleBtn.innerText = 'Close';
+    // Rotate icon or toggle specific class if needed for visuals
+    toggleBtn.classList.toggle('active');
 });
 
 let mouse = {

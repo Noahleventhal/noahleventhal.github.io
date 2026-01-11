@@ -80,6 +80,8 @@ h1 {
     color: rgba(255, 255, 255, 0.9);
     /* Slightly brighter for thickness perception */
     margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    /* Reduced gap */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     /* Readability over lines */
 }
@@ -90,36 +92,136 @@ h1 {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #ffffff;
-    color: #0f172a;
-    /* Slate 900 */
+    background: rgba(255, 255, 255, 0.1);
+    /* Transparent/Glass */
+    color: #ffffff;
+    /* White text */
     font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    padding: 10px 24px;
+    font-weight: 600;
+    /* Slightly lighter weight */
+    font-size: 0.9rem;
+    /* Slightly smaller */
+    padding: 8px 20px;
+    /* Slightly smaller padding */
     border-radius: 12px;
-    /* Less rounded, more rectangular */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Subtle border */
+    backdrop-filter: blur(10px);
+    /* Glass blur */
     text-decoration: none;
-    margin-top: 1rem;
-    /* Closer to text */
+    margin-top: 1.25rem;
+    /* Further down */
     margin-bottom: 0.5rem;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     pointer-events: auto;
-    /* CRITICAL: Override container's lack of pointer events */
     position: relative;
     z-index: 20;
 }
 
 .resume-button:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    background: #f1f5f9;
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+/* Fix: Correct selector for SVG */
 .resume-button svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Bouncy transition */
+}
+
+/* Smoother Icon Drop Animation */
+.resume-button.downloading svg {
+    animation: icon-smooth-drop 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Subtle Press Effect */
+.resume-button.downloading {
+    transform: scale(0.97);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes icon-smooth-drop {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    30% {
+        transform: translateY(8px);
+        opacity: 0;
+    }
+
+    /* Drop out */
+    35% {
+        transform: translateY(-8px);
+        opacity: 0;
+    }
+
+    /* Reset top */
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    /* Fall in */
+}
+
+/* Scroll Indicator */
+/* Scroll Indicator (Triple Arrow) */
+/* Scroll Indicator (Triple Arrow Horizontal) */
+.scroll-indicator {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    /* Horizontal */
+    align-items: center;
+    gap: 0.25rem;
+    /* Small gap between arrows */
+    opacity: 0.8;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 20;
+}
+
+.scroll-indicator svg {
+    width: 24px;
+    height: 24px;
+    animation: scroll-pulse 2s infinite ease-in-out;
+}
+
+.scroll-indicator .arrow-1 {
+    animation-delay: 0s;
+}
+
+.scroll-indicator .arrow-2 {
+    animation-delay: 0.2s;
+}
+
+.scroll-indicator .arrow-3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes scroll-pulse {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(6px);
+        opacity: 1;
+    }
 }
 
 p {

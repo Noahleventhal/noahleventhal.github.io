@@ -539,6 +539,84 @@ p {
     color: rgba(255, 255, 255, 0.6);
 }
 
+/* --- Mobile Optimization --- */
+@media (max-width: 768px) {
+    .container {
+        padding-top: 15vh;
+    }
+
+    h1 {
+        font-size: 13vw;
+        /* Big and bold */
+        white-space: normal;
+        /* Allow wrap */
+        line-height: 1;
+        padding: 0 10px;
+    }
+
+    .hero-subtext {
+        font-size: 1rem;
+        padding: 0 20px;
+        line-height: 1.4;
+    }
+
+    /* Spinner Adaptation */
+    .spinner-container {
+        flex-direction: column;
+        /* Stack them: looks good like a list */
+        gap: 0.5rem;
+        height: auto;
+        margin-top: 2rem;
+    }
+
+    .spinner-text-static {
+        display: none;
+        /* Hide "who builds" to save space, or make small? */
+        /* Let's keep it but small */
+        display: block;
+        font-size: 0.9rem;
+        margin: 5px 0;
+    }
+
+    .spinner-column {
+        width: 90vw;
+        /* Full width */
+        height: 60px;
+        /* Height of one item */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .spinner-item {
+        font-size: 1.5rem !important;
+        /* Smaller text */
+    }
+
+    /* Island Adjustments */
+    .island {
+        padding: 40px 20px;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+    }
+
+    .island-container {
+        margin-top: -1rem !important;
+    }
+
+    /* Safe Area & Controls */
+    .scroll-indicator {
+        bottom: max(1rem, env(safe-area-inset-bottom) + 0.5rem);
+    }
+
+    .controls {
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        border-radius: 20px 20px 0 0;
+        max-height: 50vh;
+    }
+}
+
 .spinner-column {
     height: 100%;
     width: 360px;

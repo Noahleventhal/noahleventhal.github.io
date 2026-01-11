@@ -7,7 +7,17 @@ faviconLink.type = 'image/x-icon';
 faviconLink.rel = 'shortcut icon';
 document.getElementsByTagName('head')[0].appendChild(faviconLink);
 
-// Start Loop
+const fonts = [
+    'Inter', 'Times New Roman', 'Courier New', 'Brush Script MT',
+    'Copperplate', 'Papyrus', 'Comic Sans MS', 'Impact', 'Georgia',
+    'Verdana', 'Arial Black', 'Lucida Console', 'Garamond',
+    'Trebuchet MS', 'Palatino', 'Geneva', 'Optima', 'Didot',
+    'American Typewriter', 'Andale Mono'
+];
+
+let fontIndex = 0;
+
+// Start Loop Immediately
 setInterval(() => {
     // 1. Clear
     faviconCtx.clearRect(0, 0, 64, 64);
@@ -44,8 +54,9 @@ setInterval(() => {
     faviconCtx.font = `bold 40px "${font}"`;
     faviconCtx.fillText('N', 32, 34);
 
+    faviconCtx.restore();
+
     // 5. Update Link
     faviconLink.href = faviconCanvas.toDataURL('image/png');
 
-    faviconCtx.restore();
 }, 1000);

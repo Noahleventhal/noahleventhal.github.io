@@ -27,7 +27,7 @@ bgImage.onload = function () {
         faviconCtx.drawImage(bgImage, 0, 0, 64, 64);
 
         // 2. Draw 'N'
-        faviconCtx.fillStyle = '#00ff00'; // Green
+        faviconCtx.fillStyle = 'black';
         faviconCtx.textAlign = 'center';
         faviconCtx.textBaseline = 'middle';
 

@@ -22,8 +22,25 @@ let fontIndex = 0;
 
 bgImage.onload = function () {
     setInterval(() => {
-        // 1. Draw Background Tile
+        // 1. Draw Background Tile with Rounded Corners
         faviconCtx.clearRect(0, 0, 64, 64);
+
+        faviconCtx.save();
+        faviconCtx.beginPath();
+        // Super rounded corners (Squircle-ish)
+        const r = 24;
+        faviconCtx.moveTo(r, 0);
+        faviconCtx.lineTo(64 - r, 0);
+        faviconCtx.quadraticCurveTo(64, 0, 64, r);
+        faviconCtx.lineTo(64, 64 - r);
+        faviconCtx.quadraticCurveTo(64, 64, 64 - r, 64);
+        faviconCtx.lineTo(r, 64);
+        faviconCtx.quadraticCurveTo(0, 64, 0, 64 - r);
+        faviconCtx.lineTo(0, r);
+        faviconCtx.quadraticCurveTo(0, 0, r, 0);
+        faviconCtx.closePath();
+        faviconCtx.clip();
+
         faviconCtx.drawImage(bgImage, 0, 0, 64, 64);
 
         // 2. Draw 'N'
@@ -40,5 +57,7 @@ bgImage.onload = function () {
 
         // 3. Update Favicon
         faviconLink.href = faviconCanvas.toDataURL('image/png');
+
+        faviconCtx.restore();
     }, 1000); // Cycle every second
 };

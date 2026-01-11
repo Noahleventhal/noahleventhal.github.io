@@ -40,5 +40,5 @@ bgImage.onload = function () {
 
         // 3. Update Favicon
         faviconLink.href = faviconCanvas.toDataURL('image/png');
-    }, 1000); // Cycle every second
+    }, 2500); // Cycle every 2.5 seconds
 };

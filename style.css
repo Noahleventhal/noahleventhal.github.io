@@ -585,11 +585,34 @@ p {
         /* Height of one item */
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        /* CRITICAL: Mask the rolling items */
+        position: relative;
+        /* Ensure containment */
+        /* Center text vertically if needed */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Center horizontally */
+        /* justify-content: flex-start;  managed by scroll */
     }
 
     .spinner-item {
         font-size: 1.5rem !important;
         /* Smaller text */
+        height: 60px;
+        /* Force height match */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Remove warped grid background on mobile */
+    canvas {
+        opacity: 0.2;
+        /* Fade it out significantly or hide */
+        display: none;
+        /* User asked to remove it */
     }
 
     /* Island Adjustments */

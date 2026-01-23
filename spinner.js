@@ -1,7 +1,7 @@
 const descriptors = [
-    "Organizer", "Builder", "Optimizer", "Problem-solver", "Spreadsheet nerd",
+    "Organizer", "Automater", "Optimizer", "Problem-solver", "Spreadsheet nerd",
     "Tinkerer", "Planner", "Puzzle guy", "Efficiency chaser", "Pattern spotter",
-    "List maker", "Framework builder"
+    "List maker"
 ];
 
 const things = [

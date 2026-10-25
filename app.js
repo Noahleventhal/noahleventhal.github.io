@@ -66,7 +66,7 @@ function clampSelection() {
 function renderHeader() {
   if (document.activeElement !== dom.document_title) dom.document_title.value = model.book.title;
   dom.document_title.style.width = `${Math.min(420, Math.max(145, model.book.title.length * 10 + 15))}px`;
-  document.title = `${model.book.title} — Personal workbook`;
+  document.title = 'Noah Leventhal';
   const star = document.querySelector('[data-action="star"]');
   star.classList.toggle('is-active', model.book.starred); star.setAttribute('aria-pressed', model.book.starred);
   star.title = model.book.starred ? 'Unstar this workbook' : 'Star this workbook';

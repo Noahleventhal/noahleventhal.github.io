@@ -1,162 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-workbook-mode="visitor">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noah Leventhal</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
-    <script src="embed.js"></script>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8fafd">
+  <meta name="description" content="Noah Leventhal's personal spreadsheet. A little room to think, make, and explore.">
+  <title>Noah Leventhal — Personal workbook</title>
+  <link rel="icon" href="./workbook.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
 </head>
-
 <body>
-    <canvas id="canvas1"></canvas>
-
-    <!-- Home Link -->
-
-    <div class="container">
-        <h1>Noah Leventhal</h1>
-        <p class="hero-subtext">
-            Industrial Engineering student at the University of Minnesota
-        </p>
-
-        <a href="./Resume_Not_Updated_justExample.pdf" class="resume-button" download>
-            Resume
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M12 3v13.5M8.25 12.75 12 16.5l3.75-3.75" />
-            </svg>
-        </a>
-
-        <div class="spinner-container">
-            <div id="spinner-descriptors" class="spinner-column"></div>
-            <span class="spinner-text-static">who builds</span>
-            <div id="spinner-things" class="spinner-column"></div>
+  <div id="workbook" class="workbook">
+    <header class="document-header">
+      <img class="document-icon" src="./workbook.svg" alt="Personal workbook" width="34" height="42">
+      <div class="document-details">
+        <div class="document-title-row">
+          <input id="document-title" class="document-title" aria-label="Document title" readonly maxlength="100" value="Noah Leventhal" spellcheck="false">
+          <button class="icon-button star-button" data-action="star" disabled aria-label="Star this workbook" title="Star this workbook"></button>
+          <span id="save-status" class="save-status" role="status" aria-live="polite"></span>
         </div>
-
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <svg class="arrow-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
-            <svg class="arrow-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
-            <svg class="arrow-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
+        <nav id="menu-bar" class="menu-bar" aria-label="Spreadsheet menus"></nav>
+      </div>
+      <div class="header-actions">
+        <button class="icon-button" data-action="shortcuts" aria-label="Keyboard shortcuts" title="Keyboard shortcuts"></button>
+        <span class="local-badge"><span data-icon="device"></span>Local workbook</span>
+        <span class="avatar" aria-label="Noah Leventhal">N</span>
+      </div>
+    </header>
+    <section id="toolbar" class="toolbar" aria-label="Formatting toolbar"></section>
+    <section class="formula-bar" aria-label="Formula bar">
+      <input id="cell-reference" class="cell-reference" value="A1" aria-label="Cell or range reference" spellcheck="false" autocomplete="off">
+      <span class="reference-arrow" aria-hidden="true">▾</span>
+      <span class="formula-symbol" aria-hidden="true">fx</span>
+      <input id="formula-input" class="formula-input" aria-label="Cell contents" readonly autocomplete="off" spellcheck="false">
+    </section>
+    <main id="grid" class="grid" aria-label="Spreadsheet">
+      <button id="select-all" class="grid-corner" title="Select all cells" aria-label="Select all cells"><span></span></button>
+      <div id="column-headers" class="column-headers" aria-hidden="true"></div>
+      <div id="row-headers" class="row-headers" aria-hidden="true"></div>
+      <div id="sheet-scroll" class="sheet-scroll" role="grid" aria-label="Home sheet" tabindex="0" aria-multiselectable="true" aria-rowcount="1000" aria-colcount="52">
+        <div id="sheet-surface" class="sheet-surface">
+          <div id="cell-layer" class="cell-layer"></div>
+          <div id="animation-overlay" class="animation-overlay" aria-hidden="true"></div>
+          <div id="range-outline" class="range-outline" aria-hidden="true"></div>
+          <div id="active-outline" class="active-outline" aria-hidden="true"><span class="fill-handle"></span></div>
+          <textarea id="cell-editor" class="cell-editor" aria-label="Edit cell" rows="1" spellcheck="false" hidden></textarea>
         </div>
-    </div>
-
-    <!-- White Content Island -->
-    <div class="island-container">
-        <div class="island">
-            <h2>Featured Work</h2>
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
-                alt="Abstract 3D Art">
-            <p>
-                Welcome to my digital playground. This space is designed to explore the intersection of code, design,
-                and interactivity.
-                The grid behind you creates a reactive field that responds to your presence, while this island serves as
-                a stable ground for content.
-            </p>
-            <p>
-                Scroll down further to see more details about my projects, experiments, and the technologies I'm working
-                with.
-            </p>
-
-            <h2>Latest Experiments</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div style="background: #f1f5f9; padding: 30px; border-radius: 20px;">
-                    <h3 style="font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 10px; font-weight: 600;">
-                        Particle Systems</h3>
-                    <p style="font-size: 1rem; margin: 0;">Simulating natural phenomena through code.</p>
-                </div>
-                <div style="background: #f1f5f9; padding: 30px; border-radius: 20px;">
-                    <h3 style="font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 10px; font-weight: 600;">
-                        Fluid Dynamics</h3>
-                    <p style="font-size: 1rem; margin: 0;">Interactive flow fields and visualizers.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="controls hidden">
-        <div class="control-group">
-            <label for="spacingRange">Grid Size <span id="spacingValue">25px</span></label>
-            <input type="range" id="spacingRange" min="20" max="100" value="25">
-        </div>
-
-        <div class="control-group">
-            <label for="tensionRange">Bounce (Stiffness) <span id="tensionValue">0.15</span></label>
-            <input type="range" id="tensionRange" min="0.01" max="0.3" step="0.01" value="0.15">
-        </div>
-
-        <div class="control-group">
-            <label for="frictionRange">Flow (Friction) <span id="frictionValue">0.80</span></label>
-            <input type="range" id="frictionRange" min="0.80" max="0.99" step="0.01" value="0.80">
-        </div>
-
-        <div class="control-group">
-            <label for="forceRange">Push Strength <span id="forceValue">10</span></label>
-            <input type="range" id="forceRange" min="5" max="50" value="10">
-        </div>
-
-        <div class="control-group">
-            <label for="lightRadiusRange">Light Radius <span id="lightRadiusValue">388px</span></label>
-            <input type="range" id="lightRadiusRange" min="100" max="800" value="388">
-        </div>
-
-        <div class="control-group">
-            <label for="lightBoostRange">Light Boost <span id="lightBoostValue">0.24</span></label>
-            <input type="range" id="lightBoostRange" min="0.0" max="1.0" step="0.01" value="0.24">
-        </div>
-
-        <div class="control-group">
-            <label for="layoutRange">Mesh Type</label>
-            <div style="display: flex; gap: 10px; color: #94a3b8; font-size: 0.8rem; margin-top: 5px;">
-                <span>Square</span>
-                <input type="range" id="layoutRange" min="0" max="2" step="1" value="0" style="flex:1">
-                <span>Tri</span>
-                <span>Hex</span>
-            </div>
-        </div>
-
-        <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <button id="resetBtn" style="flex: 1;">Reset Defaults</button>
-            <button id="saveBtn"
-                style="flex: 1; background: rgba(148, 163, 184, 0.2); border-color: rgba(148, 163, 184, 0.4);">Save
-                Settings</button>
-        </div>
-    </div>
-
-    <button id="toggleControls" aria-label="Settings">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path
-                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2-.35l-.18-.18a2 2 0 0 0-2.83 0l-.31.31a2 2 0 0 0 0 2.83l.18.18a2 2 0 0 1 .35 2l-.25.43a2 2 0 0 1-1.73 1H2a2 2 0 0 0-2 2v.44a2 2 0 0 0 2 2h.18a2 2 0 0 1 1.73 1l.25.43a2 2 0 0 1-.35 2l-.18.18a2 2 0 0 0 0 2.83l.31.31a2 2 0 0 0 2.83 0l.18-.18a2 2 0 0 1 2-.35l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 .35l.18.18a2 2 0 0 0 2.83 0l.31-.31a2 2 0 0 0 0-2.83l-.18-.18a2 2 0 0 1-.35-2l.25-.43a2 2 0 0 1 1.73-1H22a2 2 0 0 0 2-2v-.44a2 2 0 0 0-2-2h-.18a2 2 0 0 1-1.73-1l-.25-.43a2 2 0 0 1 .35-2l.18-.18a2 2 0 0 0 0-2.83l-.31-.31a2 2 0 0 0-2.83 0l-.18.18a2 2 0 0 1-2 .35l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
-            </path>
-            <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-    </button>
-
-    <script src="./grid.js"></script>
-    <script src="./spinner.js"></script>
-    <!-- <script src="./title-effect.js"></script> ARCHIVED: Interactive Line Effect -->
-    <script src="./intro-swoosh.js"></script>
-    <script src="./resume-button.js"></script>
-    <script src="favicon.js"></script>
+      </div>
+      <div id="resize-guide" class="resize-guide" hidden aria-hidden="true"></div>
+      <div id="resize-label" class="resize-label" hidden aria-hidden="true"></div>
+    </main>
+    <section id="animation-studio" class="animation-studio" aria-label="Animation studio" hidden></section>
+    <footer class="sheet-bar">
+      <button class="icon-button" data-action="add-sheet" disabled aria-label="Add sheet" title="Add sheet"></button>
+      <button class="icon-button sheet-list-button" data-action="sheet-list" aria-label="All sheets" title="All sheets"></button>
+      <div id="sheet-tabs" class="sheet-tabs" role="tablist" aria-label="Workbook sheets"></div>
+      <div id="animation-playback-controls" class="animation-playback-controls" aria-label="Animation playback" hidden></div>
+      <span id="selection-status" class="selection-status" aria-live="polite"></span>
+    </footer>
+  </div>
+  <div id="popup" class="popup" role="menu" hidden></div>
+  <dialog id="workbook-dialog" class="workbook-dialog"></dialog>
+  <dialog id="admin-auth-dialog" class="workbook-dialog"></dialog>
+  <dialog id="animation-event-dialog" class="workbook-dialog animation-event-dialog"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>This workbook needs JavaScript to edit cells and save changes in your browser.</noscript>
 </body>
-
 </html>

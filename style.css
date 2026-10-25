@@ -76,6 +76,7 @@ button:disabled {
   margin-top:2px;
   width:31px;
   height:40px;
+  object-fit:contain;
 }
 
 .document-details {

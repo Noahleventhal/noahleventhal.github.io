@@ -1,6 +1,6 @@
 # Noah's personal workbook
 
-A full-window spreadsheet interface built with plain HTML, CSS, and JavaScript. Supabase provides administrator authentication, private drafts, and published snapshots. The interface remains a static site. Eighteen open font families and their licenses are bundled locally; the full font menu has 28 choices, including system fonts. The existing static hosting setup and custom domain are preserved.
+A full-window spreadsheet interface built with plain HTML, CSS, and JavaScript. Supabase provides administrator authentication, private drafts, and published snapshots. Vercel hosts the static site at `noahleventhal.com`; `www.noahleventhal.com` redirects to it. Eighteen open font families and their licenses are bundled locally; the full font menu has 28 choices, including system fonts.
 
 ## Open locally
 
@@ -23,7 +23,9 @@ npm test
 npm run build
 ```
 
-The optional build copies the runtime files and font assets into `dist/`. You can continue serving the project root during development or deploy the contents of `dist/` to a static host. `CNAME` is retained for the existing domain. Nothing is published by running these commands.
+The build copies the runtime files, font assets, archived pages, and existing public downloads into `dist/`. You can continue serving the project root during development. Vercel runs `npm ci` and `npm run build`, then serves `dist/`, using the settings in `vercel.json`. The GitHub repository's `main` branch is the production source. `CNAME` is retained for compatibility with the previous GitHub Pages host. Running the local commands above does not publish anything.
+
+The Vercel project is `noahleventhal-com` in Noah Leventhal's projects. DNS stays at Porkbun; only the apex A records and `www` CNAME point to Vercel. Preserve the existing MX and verification TXT records. Supabase remains the same project and keeps all published content, private drafts, and administrator accounts. Administrator login uses email/password directly with Supabase, so the hosting move does not require an OAuth callback change. Mutable asset URLs revalidate on Vercel to avoid mixing old and new JavaScript after a deployment.
 
 ## What works
 

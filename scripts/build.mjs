@@ -5,7 +5,9 @@ import {fileURLToPath} from 'node:url';
 const root = new URL('../', import.meta.url);
 const output = new URL('../dist/', import.meta.url);
 const assets = ['index.html', 'style.css', 'app.js', 'spreadsheet-model.js', 'workbook.svg', 'favicon-n.png', 'sheet-logo.png', 'CNAME', 'sheet-layout.js', 'ui-popovers.js', 'picker-data.js', 'sheet-structure.js', 'site-config.json'];
+// Keep existing public URLs available when switching from GitHub Pages.
+assets.push('Resume_Not_Updated_justExample.pdf', 'cycler.js', 'favicon-bg.png', 'favicon.js', 'grid.js', 'intro-swoosh.js', 'resume-button.js', 'spinner.js', 'title-effect.js');
 await mkdir(output, {recursive: true});
 await Promise.all(assets.map(file => copyFile(new URL(file, root), new URL(file, output))));
-for(const directory of ['assets','animation','vendor'])await cp(new URL(directory+'/',root),new URL(directory+'/',output),{recursive:true});
+for(const directory of ['assets','animation','vendor','archive'])await cp(new URL(directory+'/',root),new URL(directory+'/',output),{recursive:true});
 console.log(`Built ${assets.length} static files in ${fileURLToPath(output)}`);
